@@ -4,15 +4,15 @@ export default function Home() {
   function salvarContato() {
     const vcard = `BEGIN:VCARD
 VERSION:3.0
-N:Fukumitsu;César;;;
-FN:César Fukumitsu
-ORG:SOLUTION
-TITLE:Gerente Comercial
-TEL;TYPE=CELL,VOICE:+5511982050026
-TEL;TYPE=WHATSAPP:+5511982050026
-EMAIL:cfukumitsu@solutionrt.com.br
-URL:https://instagram.com/cfukumitsu
-URL:https://linkedin.com/in/cfukumitsu
+N:Smart;Rachel;;;
+FN:Rachel Smart
+ORG:Smart Card
+TITLE:Consultora de Networking Digital
+TEL;TYPE=CELL,VOICE:+5511999998888
+TEL;TYPE=WHATSAPP:+5511999998888
+EMAIL:rachel@smartcard.com.br
+URL:https://instagram.com/rachel.smartcard
+URL:https://linkedin.com/in/rachel-smartcard
 NOTE:Contato criado pelo Smart Card MVP
 END:VCARD`;
 
@@ -21,7 +21,7 @@ END:VCARD`;
 
     const link = document.createElement("a");
     link.href = url;
-    link.download = "cesar-fukumitsu.vcf";
+    link.download = "rachel-smart.vcf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -32,17 +32,22 @@ END:VCARD`;
   return (
     <main className="min-h-screen bg-slate-100 flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8 text-center">
+
         <div className="w-24 h-24 mx-auto rounded-full bg-blue-900 text-white flex items-center justify-center text-4xl font-bold">
-          C
+          R
         </div>
 
         <h1 className="mt-6 text-3xl font-bold text-slate-800">
-          César Fukumitsu
+          Rachel Smart
         </h1>
 
-        <p className="text-slate-500 mt-2">Gerente Comercial</p>
+        <p className="text-slate-500 mt-2">
+          Consultora de Networking Digital
+        </p>
 
-        <p className="text-blue-900 font-semibold mt-1">SOLUTION</p>
+        <p className="text-blue-900 font-semibold mt-1">
+          Smart Card
+        </p>
 
         <button
           onClick={salvarContato}
@@ -52,34 +57,40 @@ END:VCARD`;
         </button>
 
         <div className="mt-8 flex flex-col gap-3">
+
           <a
-            href="https://wa.me/5511982050026"
+            href="https://wa.me/5511999998888"
             target="_blank"
+            rel="noopener noreferrer"
             className="border rounded-xl py-3 hover:bg-slate-50"
           >
             💬 WhatsApp
           </a>
 
           <a
-            href="https://instagram.com/cfukumitsu"
+            href="https://instagram.com/rachel.smartcard"
             target="_blank"
+            rel="noopener noreferrer"
             className="border rounded-xl py-3 hover:bg-slate-50"
           >
             📷 Instagram
           </a>
 
           <a
-            href="https://linkedin.com/in/cfukumitsu"
+            href="https://linkedin.com/in/rachel-smartcard"
             target="_blank"
+            rel="noopener noreferrer"
             className="border rounded-xl py-3 hover:bg-slate-50"
           >
             💼 LinkedIn
           </a>
+
         </div>
 
         <p className="mt-8 text-xs text-slate-400">
           Powered by Smart Card MVP
         </p>
+
       </div>
     </main>
   );
