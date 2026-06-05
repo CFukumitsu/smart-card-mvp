@@ -1,3 +1,5 @@
+import QRCode from "react-qr-code";
+
 export default function Home() {
   const cardUrl = "https://smart-card-mvp.vercel.app/rachel";
 
@@ -19,8 +21,11 @@ export default function Home() {
             Aproxime o NFC ou escaneie o QR Code
           </p>
 
-          <div className="w-40 h-40 mx-auto bg-white rounded-xl flex items-center justify-center text-slate-900 font-bold">
-            QR CODE
+          <div className="bg-white p-3 rounded-xl inline-block">
+            <QRCode
+              value={cardUrl}
+              size={140}
+            />
           </div>
 
           <p className="text-xs text-slate-400 mt-3 break-all">
