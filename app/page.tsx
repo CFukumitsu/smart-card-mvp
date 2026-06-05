@@ -1,97 +1,72 @@
-"use client";
-
 export default function Home() {
-  function salvarContato() {
-    const vcard = `BEGIN:VCARD
-VERSION:3.0
-N:Smart;Rachel;;;
-FN:Rachel Smart
-ORG:Smart Card
-TITLE:Consultora de Networking Digital
-TEL;TYPE=CELL,VOICE:+5511999998888
-TEL;TYPE=WHATSAPP:+5511999998888
-EMAIL:rachel@smartcard.com.br
-URL:https://instagram.com/rachel.smartcard
-URL:https://linkedin.com/in/rachel-smartcard
-NOTE:Contato criado pelo Smart Card MVP
-END:VCARD`;
-
-    const blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
-    const url = window.URL.createObjectURL(blob);
-
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "rachel-smart.vcf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    window.URL.revokeObjectURL(url);
-  }
+  const cardUrl = "https://smart-card-mvp.vercel.app/rachel";
 
   return (
-    <main className="min-h-screen bg-slate-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8 text-center">
+    <main className="min-h-screen bg-slate-950 text-white flex items-center justify-center p-6">
+      <section className="w-full max-w-md bg-slate-900 rounded-3xl shadow-2xl p-6 border border-slate-700">
+        <div className="text-center">
+          <div className="w-28 h-28 mx-auto rounded-full bg-gradient-to-br from-blue-500 to-yellow-400 flex items-center justify-center text-4xl font-bold">
+            R
+          </div>
 
-        <div className="w-24 h-24 mx-auto rounded-full bg-blue-900 text-white flex items-center justify-center text-4xl font-bold">
-          R
+          <h1 className="mt-5 text-3xl font-bold">Rachel FKT</h1>
+          <p className="text-slate-300 mt-1">Consultora Comercial</p>
+          <p className="text-yellow-400 font-semibold">Smart Card Digital</p>
         </div>
 
-        <h1 className="mt-6 text-3xl font-bold text-slate-800">
-          Rachel Smart
-        </h1>
+        <div className="mt-6 bg-slate-800 rounded-2xl p-4 text-center">
+          <p className="text-sm text-slate-300 mb-2">
+            Aproxime o NFC ou escaneie o QR Code
+          </p>
 
-        <p className="text-slate-500 mt-2">
-          Consultora de Networking Digital
-        </p>
+          <div className="w-40 h-40 mx-auto bg-white rounded-xl flex items-center justify-center text-slate-900 font-bold">
+            QR CODE
+          </div>
 
-        <p className="text-blue-900 font-semibold mt-1">
-          Smart Card
-        </p>
-
-        <button
-          onClick={salvarContato}
-          className="mt-8 w-full bg-blue-900 text-white py-3 rounded-xl font-semibold hover:bg-blue-800 transition"
-        >
-          Salvar Contato
-        </button>
-
-        <div className="mt-8 flex flex-col gap-3">
-
-          <a
-            href="https://wa.me/5511999998888"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border rounded-xl py-3 hover:bg-slate-50"
-          >
-            💬 WhatsApp
-          </a>
-
-          <a
-            href="https://instagram.com/rachel.smartcard"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border rounded-xl py-3 hover:bg-slate-50"
-          >
-            📷 Instagram
-          </a>
-
-          <a
-            href="https://linkedin.com/in/rachel-smartcard"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border rounded-xl py-3 hover:bg-slate-50"
-          >
-            💼 LinkedIn
-          </a>
-
+          <p className="text-xs text-slate-400 mt-3 break-all">
+            {cardUrl}
+          </p>
         </div>
 
-        <p className="mt-8 text-xs text-slate-400">
-          Powered by Smart Card MVP
-        </p>
+        <div className="mt-6 space-y-3">
+          <a
+            href="https://wa.me/5511999999999"
+            className="block w-full text-center bg-green-500 text-white py-3 rounded-xl font-semibold"
+          >
+            Chamar no WhatsApp
+          </a>
 
-      </div>
+          <a
+            href="https://www.instagram.com/solution.gestao/"
+            className="block w-full text-center bg-pink-500 text-white py-3 rounded-xl font-semibold"
+          >
+            Ver Instagram
+          </a>
+
+          <a
+            href="https://www.linkedin.com/"
+            className="block w-full text-center bg-blue-600 text-white py-3 rounded-xl font-semibold"
+          >
+            Ver LinkedIn
+          </a>
+
+          <a
+            href={`mailto:contato@solution.com.br`}
+            className="block w-full text-center bg-slate-700 text-white py-3 rounded-xl font-semibold"
+          >
+            Enviar E-mail
+          </a>
+        </div>
+
+        <div className="mt-6 border-t border-slate-700 pt-4 text-center">
+          <p className="text-xs text-slate-400">
+            Cartão digital com QR Code e NFC
+          </p>
+          <p className="text-sm font-semibold text-yellow-400">
+            Smart Card MVP
+          </p>
+        </div>
+      </section>
     </main>
   );
 }
