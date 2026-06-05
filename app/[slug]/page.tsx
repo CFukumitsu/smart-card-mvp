@@ -33,6 +33,12 @@ export default async function CardPage({
             <QRCode value={cardUrl} size={150} />
           </div>
 
+          <a
+            href={`/${slug}.vcf`}
+            className="mt-4 block w-full text-center bg-yellow-400 text-slate-950 py-3 rounded-xl font-bold"
+          >
+            Salvar contato
+          </a>
           <p className="text-xs text-slate-400 mt-3 break-all">
             {cardUrl}
           </p>

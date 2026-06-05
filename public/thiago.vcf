@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Barba;Thiago;;;
+FN:Thiago Barba
+ORG:Smart Card MVP
+TITLE:Consultor Comercial
+TEL;TYPE=CELL,WHATSAPP:+5511999999999
+EMAIL:thiago@email.com
+URL:https://smart-card-mvp.vercel.app/thiago
+END:VCARD
