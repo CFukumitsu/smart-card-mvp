@@ -1,4 +1,5 @@
 import QRCode from "react-qr-code";
+import { contacts } from "../src/data/contacts";
 
 export default async function CardPage({
   params,
@@ -6,6 +7,11 @@ export default async function CardPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const contact = contacts[slug as keyof typeof contacts];
+
+  if (!contact) {
+    return <main>Contato não encontrado</main>;
+  }
 
   const cardUrl = `https://smart-card-mvp.vercel.app/${slug}`;
 
@@ -13,7 +19,7 @@ export default async function CardPage({
     <main className="min-h-screen bg-slate-950 text-white flex items-center justify-center p-6">
       <section className="w-full max-w-md bg-slate-900 rounded-3xl shadow-2xl p-6 border border-slate-700 text-center">
         <h1 className="text-4xl font-bold">
-          {slug.toUpperCase()}
+          {contact.fullName}
         </h1>
 
         <p className="mt-3 text-slate-300">
