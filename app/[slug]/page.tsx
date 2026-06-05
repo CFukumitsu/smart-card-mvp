@@ -23,7 +23,7 @@ export default async function CardPage({
         <p className="mt-2 text-yellow-400 font-semibold">
           Página dinâmica funcionando 🚀
         </p>
-
+      
         <div className="mt-6 bg-slate-800 rounded-2xl p-4">
           <p className="text-sm text-slate-300 mb-3">
             Aproxime o NFC ou escaneie o QR Code
@@ -34,7 +34,7 @@ export default async function CardPage({
           </div>
 
           <a
-            href={`/${slug}.vcf`}
+            href={`/api/vcard/${slug}`}
             className="mt-4 block w-full text-center bg-yellow-400 text-slate-950 py-3 rounded-xl font-bold"
           >
             Salvar contato
