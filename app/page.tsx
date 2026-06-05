@@ -1,65 +1,86 @@
-import Image from "next/image";
+"use client";
 
 export default function Home() {
+  function salvarContato() {
+    const vcard = `BEGIN:VCARD
+VERSION:3.0
+N:Fukumitsu;César;;;
+FN:César Fukumitsu
+ORG:SOLUTION
+TITLE:Gerente Comercial
+TEL;TYPE=CELL,VOICE:+5511982050026
+TEL;TYPE=WHATSAPP:+5511982050026
+EMAIL:cfukumitsu@solutionrt.com.br
+URL:https://instagram.com/cfukumitsu
+URL:https://linkedin.com/in/cfukumitsu
+NOTE:Contato criado pelo Smart Card MVP
+END:VCARD`;
+
+    const blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
+    const url = window.URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "cesar-fukumitsu.vcf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    window.URL.revokeObjectURL(url);
+  }
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="min-h-screen bg-slate-100 flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8 text-center">
+        <div className="w-24 h-24 mx-auto rounded-full bg-blue-900 text-white flex items-center justify-center text-4xl font-bold">
+          C
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+
+        <h1 className="mt-6 text-3xl font-bold text-slate-800">
+          César Fukumitsu
+        </h1>
+
+        <p className="text-slate-500 mt-2">Gerente Comercial</p>
+
+        <p className="text-blue-900 font-semibold mt-1">SOLUTION</p>
+
+        <button
+          onClick={salvarContato}
+          className="mt-8 w-full bg-blue-900 text-white py-3 rounded-xl font-semibold hover:bg-blue-800 transition"
+        >
+          Salvar Contato
+        </button>
+
+        <div className="mt-8 flex flex-col gap-3">
           <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            href="https://wa.me/5511982050026"
             target="_blank"
-            rel="noopener noreferrer"
+            className="border rounded-xl py-3 hover:bg-slate-50"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
+            💬 WhatsApp
           </a>
+
           <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            href="https://instagram.com/cfukumitsu"
             target="_blank"
-            rel="noopener noreferrer"
+            className="border rounded-xl py-3 hover:bg-slate-50"
           >
-            Documentation
+            📷 Instagram
+          </a>
+
+          <a
+            href="https://linkedin.com/in/cfukumitsu"
+            target="_blank"
+            className="border rounded-xl py-3 hover:bg-slate-50"
+          >
+            💼 LinkedIn
           </a>
         </div>
-      </main>
-    </div>
+
+        <p className="mt-8 text-xs text-slate-400">
+          Powered by Smart Card MVP
+        </p>
+      </div>
+    </main>
   );
 }
