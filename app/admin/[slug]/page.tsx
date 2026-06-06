@@ -1,4 +1,5 @@
 import { supabase } from "../../src/lib/supabase";
+import { updateCard } from "./actions";
 
 export default async function AdminCardPage({
   params,
@@ -32,7 +33,7 @@ export default async function AdminCardPage({
           </nav>
         </aside>
 
-        <section className="space-y-6">
+        <form action={updateCard.bind(null, slug)} className="space-y-6">
           <div>
             <p className="text-sm text-slate-400">
               Smart Card &gt; Cartões &gt; {card.full_name}
@@ -47,29 +48,35 @@ export default async function AdminCardPage({
               <h3 className="font-bold mb-4">Dados Básicos</h3>
 
               <label className="text-sm text-slate-400">Nome</label>
-              <input className="w-full mt-1 mb-3 bg-slate-800 border border-slate-700 rounded-lg p-3" defaultValue={card.full_name} />
+              <input name="full_name" className="w-full mt-1 mb-3 bg-slate-800 border border-slate-700 rounded-lg p-3" defaultValue={card.full_name} />
 
               <label className="text-sm text-slate-400">Cargo</label>
-              <input className="w-full mt-1 mb-3 bg-slate-800 border border-slate-700 rounded-lg p-3" defaultValue={card.title} />
+              <input name="title" className="w-full mt-1 mb-3 bg-slate-800 border border-slate-700 rounded-lg p-3" defaultValue={card.title} />
 
               <label className="text-sm text-slate-400">Empresa</label>
-              <input className="w-full mt-1 mb-3 bg-slate-800 border border-slate-700 rounded-lg p-3" defaultValue={card.company} />
+              <input name="company" className="w-full mt-1 mb-3 bg-slate-800 border border-slate-700 rounded-lg p-3" defaultValue={card.company} />
 
               <label className="text-sm text-slate-400">Slug</label>
-              <input className="w-full mt-1 bg-slate-800 border border-slate-700 rounded-lg p-3" defaultValue={card.slug} />
+              <input name="slug" className="w-full mt-1 bg-slate-800 border border-slate-700 rounded-lg p-3" defaultValue={card.slug} />
             </div>
 
             <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5">
               <h3 className="font-bold mb-4">Contato</h3>
 
               <label className="text-sm text-slate-400">Telefone</label>
-              <input className="w-full mt-1 mb-3 bg-slate-800 border border-slate-700 rounded-lg p-3" defaultValue={card.phone} />
+              <input name="phone" className="w-full mt-1 mb-3 bg-slate-800 border border-slate-700 rounded-lg p-3" defaultValue={card.phone} />
 
               <label className="text-sm text-slate-400">E-mail</label>
-              <input className="w-full mt-1 mb-3 bg-slate-800 border border-slate-700 rounded-lg p-3" defaultValue={card.email} />
+              <input name="email" className="w-full mt-1 mb-3 bg-slate-800 border border-slate-700 rounded-lg p-3" defaultValue={card.email} />
+
+              <label className="text-sm text-slate-400">Instagram</label>
+              <input name="instagram" className="w-full mt-1 bg-slate-800 border border-slate-700 rounded-lg p-3" defaultValue={card.instagram} />
+
+              <label className="text-sm text-slate-400">Linkedin</label>
+              <input name="linkedin" className="w-full mt-1 bg-slate-800 border border-slate-700 rounded-lg p-3" defaultValue={card.linkedin} />
 
               <label className="text-sm text-slate-400">Website</label>
-              <input className="w-full mt-1 bg-slate-800 border border-slate-700 rounded-lg p-3" defaultValue={card.website} />
+              <input name="website" className="w-full mt-1 bg-slate-800 border border-slate-700 rounded-lg p-3" defaultValue={card.website} />
             </div>
           </div>
 
@@ -77,16 +84,16 @@ export default async function AdminCardPage({
             <h3 className="font-bold mb-4">Botões da Home</h3>
 
             <div className="grid grid-cols-3 gap-4 text-sm">
-              <label><input type="checkbox" defaultChecked={card.show_whatsapp} /> WhatsApp</label>
-              <label><input type="checkbox" defaultChecked={card.show_email} /> E-mail</label>
-              <label><input type="checkbox" defaultChecked={card.show_instagram} /> Instagram</label>
-              <label><input type="checkbox" defaultChecked={card.show_linkedin} /> LinkedIn</label>
-              <label><input type="checkbox" defaultChecked={card.show_website} /> Website</label>
+              <label><input name="show_whatsapp" type="checkbox" defaultChecked={card.show_whatsapp} /> WhatsApp</label>
+              <label><input name="show_email" type="checkbox" defaultChecked={card.show_email} /> E-mail</label>
+              <label><input name="show_instagram" type="checkbox" defaultChecked={card.show_instagram} /> Instagram</label>
+              <label><input name="show_linkedin" type="checkbox" defaultChecked={card.show_linkedin} /> LinkedIn</label>
+              <label><input name="show_website" type="checkbox" defaultChecked={card.show_website} /> Website</label>
             </div>
           </div>
 
           <div className="flex gap-4">
-            <button className="bg-blue-600 hover:bg-blue-500 px-6 py-3 rounded-xl font-bold">
+            <button type="submit" className="bg-blue-600 hover:bg-blue-500 px-6 py-3 rounded-xl font-bold">
               Salvar alterações
             </button>
 
@@ -98,7 +105,7 @@ export default async function AdminCardPage({
               Visualizar cartão
             </a>
           </div>
-        </section>
+        </form>
 
         <aside className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
           <h3 className="font-bold mb-6">Preview do Cartão</h3>

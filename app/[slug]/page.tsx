@@ -82,7 +82,7 @@ export default async function CardPage({
 
           {contact.show_linkedin && contact.linkedin && (
             <a
-              href={contact.linkedin}
+            href={`https://linkedin.com/in/${contact.linkedin}`}
               target="_blank"
               className="block w-full bg-blue-600 py-3 rounded-xl font-bold"
             >
