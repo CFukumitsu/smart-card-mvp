@@ -7,12 +7,13 @@ import PhotoUploader from "./PhotoUploader";
 
 export default function AdminCardEditor({
   card,
+  stats,
   action,
 }: {
   card: any;
+  stats?: any;
   action: (formData: FormData) => void;
-}) {
-  const [liveCard, setLiveCard] = useState(card);
+}) {  const [liveCard, setLiveCard] = useState(card);
 
   function updateField(field: string, value: any) {
     setLiveCard((prev: any) => ({
