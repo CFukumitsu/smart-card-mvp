@@ -31,7 +31,7 @@ export default function AdminCardEditor({
     "rounded-2xl border border-white/10 bg-[#0d1424]/90 shadow-[0_20px_60px_rgba(0,0,0,0.35)]";
 
   return (
-    <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_460px]">
+    <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_280px]">
       <div>
         <form action={action}>
           <div className="mb-5 flex items-center justify-between">

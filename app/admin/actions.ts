@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { supabase } from "../../src/lib/supabase";
+import { supabase } from "../src/lib/supabase";
 
 export async function updateCard(slugAtual: string, formData: FormData) {
   const full_name = String(formData.get("full_name") || "");
@@ -41,7 +41,7 @@ export async function updateCard(slugAtual: string, formData: FormData) {
       show_instagram,
       show_linkedin,
       show_website,
-      theme
+      theme,
     })
     .eq("slug", slugAtual);
 
@@ -50,8 +50,10 @@ export async function updateCard(slugAtual: string, formData: FormData) {
     throw new Error("Erro ao salvar cartão");
   }
 
-  revalidatePath(`/admin/${slug}`);
+  revalidatePath("/admin/card");
+  revalidatePath("/admin/analytics");
+  revalidatePath(`/card/${slug}`);
   revalidatePath(`/${slug}`);
 
-  redirect(`/admin/${slug}`);
+  redirect("/admin/card?saved=true");
 }

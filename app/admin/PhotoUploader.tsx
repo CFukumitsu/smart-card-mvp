@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { supabase } from "../../src/lib/supabase";
+import { supabase } from "../src/lib/supabase";
 
 export default function PhotoUploader({
   onUpload,

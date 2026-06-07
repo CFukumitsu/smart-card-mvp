@@ -1,22 +1,41 @@
-import { supabase } from "../../../src/lib/supabase";
+import { redirect } from "next/navigation";
+import { createClient } from "../../src/lib/supabaseServer";
 
-export default async function AnalyticsPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
+export default async function AnalyticsPage() {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect("/login");
+  }
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("client_id")
+    .eq("id", user.id)
+    .single();
+
+  if (!profile?.client_id) {
+    return <main className="p-8 text-white">Perfil sem cliente vinculado.</main>;
+  }
 
   const { data: card } = await supabase
     .from("cards")
     .select("*")
-    .eq("slug", slug)
+    .eq("client_id", profile.client_id)
     .single();
+
+  if (!card) {
+    return <main className="p-8 text-white">Nenhum cartão encontrado.</main>;
+  }
 
   const { data: events } = await supabase
     .from("card_events")
     .select("event_type, created_at")
-    .eq("card_slug", slug);
+    .eq("card_slug", card.slug);
 
   const count = (type: string) =>
     events?.filter((event) => event.event_type === type).length || 0;
@@ -71,7 +90,7 @@ export default async function AnalyticsPage({
       <div className="mb-8">
         <p className="text-sm text-slate-400">
           Smart Card &gt; Dashboard &gt;{" "}
-          <span className="text-white">{card?.full_name}</span>
+          <span className="text-white">{card.full_name}</span>
         </p>
 
         <h1 className="mt-2 text-3xl font-bold">Dashboard</h1>
