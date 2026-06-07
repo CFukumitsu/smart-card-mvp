@@ -4,17 +4,19 @@ type TrackedLinkProps = {
   slug: string;
   eventType: string;
   href: string;
-  children: React.ReactNode;
   className?: string;
+  children: React.ReactNode;
+  target?: string;
 };
 
 export default function TrackedLink({
   slug,
   eventType,
   href,
-  children,
   className,
-}: TrackedLinkProps) {
+  children,
+  target,
+}: TrackedLinkProps){
   async function trackClick() {
     fetch("/api/analytics", {
       method: "POST",
@@ -31,11 +33,9 @@ export default function TrackedLink({
   return (
     <a
       href={href}
-      target={href.startsWith("http") ? "_blank" : undefined}
-      onClick={trackClick}
+      target={target}
+      rel={target === "_blank" ? "noopener noreferrer" : undefined}
       className={className}
     >
-      {children}
-    </a>
   );
 }
