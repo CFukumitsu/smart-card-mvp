@@ -21,7 +21,11 @@ export default async function AdminLayout({
     <main className="min-h-screen bg-[#070b16] text-white">
       <div className="min-h-screen md:grid md:grid-cols-[230px_1fr]">
         <div className="hidden md:block">
-          <AdminSidebar slug={slug} fullName={card?.full_name} />
+          <AdminSidebar
+            slug={slug}
+            active="dashboard"
+            fullName={card?.full_name}
+          />
         </div>
 
         <section className="p-5 md:p-8">
