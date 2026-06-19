@@ -20,10 +20,20 @@ export default function LoginPage() {
     setLoading(true);
     setErrorMessage("");
 
+    await supabaseClient.auth.signOut();
+
     const { error } = await supabaseClient.auth.signInWithPassword({
       email,
       password,
     });
+
+    if (error) {
+      setErrorMessage(error.message);
+      return;
+    }
+
+    router.push("/admin");
+    router.refresh();
 
     setLoading(false);
 
@@ -42,16 +52,16 @@ export default function LoginPage() {
           redirectTo: `${window.location.origin}/reset-password`,
         }
       );
-  
+
       if (error) {
         console.error(error);
         throw error;
       }
-  
+
       setResetMessage("E-mail enviado.");
     } catch (err: any) {
       console.error("RESET ERROR:", err);
-  
+
       setErrorMessage(
         err?.message || "Não foi possível enviar o e-mail de recuperação."
       );

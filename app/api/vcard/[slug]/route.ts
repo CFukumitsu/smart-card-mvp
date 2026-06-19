@@ -1,52 +1,42 @@
-const contacts: Record<string, any> = {
-    thiago: {
-      firstName: "Thiago",
-      lastName: "Barba",
-      fullName: "Thiago Barba",
-      company: "Smart Card MVP",
-      title: "Consultor Comercial",
-      phone: "+5511999999999",
-      email: "thiago@email.com",
-      url: "https://smart-card-mvp.vercel.app/thiago",
-    },
-    cesar: {
-      firstName: "César",
-      lastName: "Fukumitsu",
-      fullName: "César Fukumitsu",
-      company: "SOLUTION",
-      title: "Consultor Comercial",
-      phone: "+5511999999999",
-      email: "cesar@email.com",
-      url: "https://smart-card-mvp.vercel.app/cesar",
-    },
-  };
-  
-  export async function GET(
-    request: Request,
-    { params }: { params: Promise<{ slug: string }> }
-  ) {
-    const { slug } = await params;
-    const contact = contacts[slug];
-  
-    if (!contact) {
-      return new Response("Contato não encontrado", { status: 404 });
-    }
-  
-    const vcard = `BEGIN:VCARD
-  VERSION:3.0
-  N:${contact.lastName};${contact.firstName};;;
-  FN:${contact.fullName}
-  ORG:${contact.company}
-  TITLE:${contact.title}
-  TEL;TYPE=CELL:${contact.phone}
-  EMAIL:${contact.email}
-  URL:${contact.url}
-  END:VCARD`;
-  
-    return new Response(vcard, {
-      headers: {
-        "Content-Type": "text/vcard; charset=utf-8",
-        "Content-Disposition": `attachment; filename="${slug}.vcf"`,
-      },
-    });
+import { supabaseAdmin } from "../../../src/lib/supabaseAdmin";
+
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  const { slug } = await params;
+
+  const { data: card, error } = await supabaseAdmin
+    .from("cards")
+    .select("full_name, company, title, phone, email, website, bio")
+    .eq("slug", slug)
+    .single();
+
+  if (error || !card) {
+    return new Response("Contato não encontrado", { status: 404 });
   }
+
+  const fullName = card.full_name || "Contato";
+  const nameParts = fullName.trim().split(" ");
+  const firstName = nameParts[0] || "";
+  const lastName = nameParts.slice(1).join(" ") || "";
+
+  const vcard = `BEGIN:VCARD
+VERSION:3.0
+N:${lastName};${firstName};;;
+FN:${fullName}
+ORG:${card.company || ""}
+TITLE:${card.title || ""}
+TEL;TYPE=CELL:${card.phone || ""}
+EMAIL:${card.email || ""}
+URL:${card.website || ""}
+NOTE:${card.bio || ""}
+END:VCARD`;
+
+  return new Response(vcard, {
+    headers: {
+      "Content-Type": "text/vcard; charset=utf-8",
+      "Content-Disposition": `attachment; filename="${slug}.vcf"`,
+    },
+  });
+}
